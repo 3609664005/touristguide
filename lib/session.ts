@@ -10,7 +10,7 @@ export const sessionOptions: SessionOptions = {
   cookieName: "admin-session",
   cookieOptions: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: false,
     sameSite: "lax" as const,
     path: "/",
     maxAge: 60 * 60 * 8,
