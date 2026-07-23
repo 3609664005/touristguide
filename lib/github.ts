@@ -114,7 +114,7 @@ export async function updateGitHubFile(
   });
 
   console.log('[GitHub] PUT status:', putRes.status, putRes.statusText);
-  if \(putRes\.status === 409\) {
+  if (putRes.status === 409) {
     throw new Error("保存失败，文件已被他人修改，请刷新页面后重试。");
   }
 
