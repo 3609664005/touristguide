@@ -66,9 +66,6 @@ export async function updateGitHubFile(
   newContent: string,
   commitMessage: string
 ): Promise<void> {
-  // DEBUG: log mode
-  const _cfg = getGitHubConfig();
-  console.log("[GitHub] isLocalMode:", isLocalMode(), "hasToken:", !!_cfg.token, "hasOwner:", !!_cfg.owner, "hasRepo:", !!_cfg.repo, "env:", process.env.NODE_ENV);
   if (isLocalMode()) {
     // 本地模式：直接写文件
     const fileName = path.basename(filePath);
@@ -113,7 +110,6 @@ export async function updateGitHubFile(
     body: JSON.stringify(putBody),
   });
 
-  console.log('[GitHub] PUT status:', putRes.status, putRes.statusText);
   if (putRes.status === 409) {
     throw new Error("保存失败，文件已被他人修改，请刷新页面后重试。");
   }
