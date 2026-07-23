@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
+import { sealData } from "iron-session";
 import { sessionOptions, SessionData } from "@/lib/session";
 
 export async function POST(request: NextRequest) {
@@ -19,10 +18,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "密码错误" }, { status: 401 });
     }
 
-    const session = await getIronSession<SessionData>(await cookies(), sessionOptions);
-    session.isLoggedIn = true;
-    await session.save();
-    return NextResponse.json({ success: true });
+    const sessionData: SessionData = { isLoggedIn: true };
+    const sealed = await sealData(sessionData, { password: sessionOptions.password });
+
+    const response = NextResponse.json({ success: true });
+    response.cookies.set(sessionOptions.cookieName, sealed, sessionOptions.cookieOptions);
+    return response;
   } catch (err) {
     console.error("Login error:", err);
     return NextResponse.json({ error: "服务器内部错误" }, { status: 500 });
