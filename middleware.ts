@@ -13,6 +13,8 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!pathname.startsWith("/admin")) return NextResponse.next();
+  // 页面路由交给前端判断，中间件只保护 API
+  if (!pathname.startsWith("/admin/api/")) return NextResponse.next();
 
   const publicPaths = ["/admin/login", "/admin/api/"];
   const isPublic = publicPaths.some(
