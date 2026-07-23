@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "@/lib/session";
-
 import { validateEntity, updateGitHubFile } from "@/lib/github";
 import { getAllEntities } from "@/lib/entities";
 import type { Entity } from "@/lib/entities";
@@ -60,8 +59,20 @@ export async function POST(request: NextRequest) {
       ? `更新实体: ${newEntity.name}`
       : `新增实体: ${newEntity.name}`;
 
-    await updateGitHubFile("data/entities.json", newContent, commitMsg);
-    return NextResponse.json({ success: true });
+    // Write via GitHub API and report result
+    const isLocal = process.env.NODE_ENV === "development" || !(process.env.GITHUB_TOKEN && process.env.GITHUB_OWNER && process.env.GITHUB_REPO);
+    let writeResult = "unknown";
+    try {
+      await updateGitHubFile("data/entities.json", newContent, commitMsg);
+      writeResult = "ok";
+    } catch (e) {
+      writeResult = e instanceof Error ? e.message : "error";
+    }
+
+    return NextResponse.json({
+      success: true,
+      debug: { mode: isLocal ? "local" : "github", write: writeResult },
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : "保存失败";
     return NextResponse.json({ error: message }, { status: 500 });
