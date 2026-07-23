@@ -19,12 +19,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "密码错误" }, { status: 401 });
     }
 
-    const response = NextResponse.json({ success: true });
     const session = await getIronSession<SessionData>(await cookies(), sessionOptions);
     session.isLoggedIn = true;
     await session.save();
-
-    return response;
+    return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Login error:", err);
     return NextResponse.json({ error: "服务器内部错误" }, { status: 500 });

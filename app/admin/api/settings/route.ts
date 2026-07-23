@@ -4,6 +4,9 @@ import { SessionData } from "@/lib/session";
 import { validateSiteConfig, updateGitHubFile } from "@/lib/github";
 import siteConfig from "@/site.config";
 
+export async function GET() {
+  return NextResponse.json(siteConfig);
+}
 export async function POST(request: NextRequest) {
   try {
     const session = await getSession();

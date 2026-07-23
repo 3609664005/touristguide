@@ -18,7 +18,7 @@ export default function SettingsPage() {
   });
 
   useEffect(() => {
-    fetch("/data/site.config.json")
+    fetch("/admin/api/settings")
       .then((r) => r.json())
       .then((data) => {
         setForm({
