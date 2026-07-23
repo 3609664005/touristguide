@@ -1,4 +1,4 @@
-/**
+﻿/**
  * GitHub API 操作 + 本地文件系统回退
  * 
  * - 生产环境 / 已配置 GitHub 环境变量：通过 GitHub API 读写文件
@@ -52,6 +52,16 @@ function writeLocalFile(fileName: string, data: unknown): void {
   fs.writeFileSync(filePath, json, "utf-8");
 }
 
+export interface GitHubWriteResult {
+  mode: string;
+  getStatus: number;
+  getSha: string;
+  putStatus: number;
+  putBody: string;
+  tokenPreview: string;
+  ownerRepo: string;
+}
+
 /**
  * 通过 GitHub API 更新文件（服务端专用）
  * 
@@ -65,17 +75,27 @@ export async function updateGitHubFile(
   filePath: string,
   newContent: string,
   commitMessage: string
-): Promise<void> {
+): Promise<GitHubWriteResult> {
   if (isLocalMode()) {
     // 本地模式：直接写文件
     const fileName = path.basename(filePath);
     writeLocalFile(fileName, JSON.parse(newContent));
     console.log(`[Local] Updated ${fileName}`);
-    return;
+    return {
+      mode: "local",
+      getStatus: 0,
+      getSha: "",
+      putStatus: 0,
+      putBody: "local_write_ok",
+      tokenPreview: "",
+      ownerRepo: "",
+    };
   }
 
   // GitHub API 模式
   const { token, owner, repo, branch } = getGitHubConfig();
+  const tokenPreview = token ? token.slice(0, 8) + "..." : "none";
+  const ownerRepo = `${owner}/${repo}`;
   const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
 
   // Step 1: 获取当前文件（含 sha）
@@ -86,6 +106,7 @@ export async function updateGitHubFile(
     },
   });
 
+  const getStatus = getRes.status;
   let sha: string | undefined;
   if (getRes.ok) {
     const data = await getRes.json();
@@ -93,12 +114,12 @@ export async function updateGitHubFile(
   }
 
   // Step 2: PUT 提交
-  const putBody = {
+  const putBodyObj = {
     message: commitMessage,
     content: Buffer.from(newContent, "utf-8").toString("base64"),
     branch,
   } as Record<string, unknown>;
-  if (sha) (putBody as Record<string, unknown>).sha = sha;
+  if (sha) (putBodyObj as Record<string, unknown>).sha = sha;
 
   const putRes = await fetch(apiUrl, {
     method: "PUT",
@@ -107,17 +128,29 @@ export async function updateGitHubFile(
       Accept: "application/vnd.github+json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(putBody),
+    body: JSON.stringify(putBodyObj),
   });
 
-  if (putRes.status === 409) {
+  const putStatus = putRes.status;
+  const putResponseBody = await putRes.text();
+
+  if (putStatus === 409) {
     throw new Error("保存失败，文件已被他人修改，请刷新页面后重试。");
   }
 
   if (!putRes.ok) {
-    const errBody = await putRes.text();
-    throw new Error(`GitHub API 错误 (${putRes.status}): ${errBody}`);
+    throw new Error(`GitHub API 错误 (${putStatus}): ${putResponseBody}`);
   }
+
+  return {
+    mode: "github",
+    getStatus,
+    getSha: sha || "",
+    putStatus,
+    putBody: putResponseBody.slice(0, 500),
+    tokenPreview,
+    ownerRepo,
+  };
 }
 
 /**
