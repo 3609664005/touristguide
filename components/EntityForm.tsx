@@ -149,20 +149,20 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
         <FormInput label="Slug（英文标识）" value={form.id} onChange={(v) => updateField("id", v)} required disabled={isEditing} placeholder="例如：my-new-shop" />
         <FormInput label="名称" value={form.name} onChange={(v) => updateField("name", v)} required placeholder="实体名称" />
         <FormSelect label="分类" value={form.category} onChange={(v) => updateField("category", v)} options={siteConfig.categories} />
-        <FormInput label="价格区间" value={form.priceRange} onChange={(v) => updateField("priceRange", v)} placeholder="¥50-100/�? />
+        <FormInput label="价格区间" value={form.priceRange} onChange={(v) => updateField("priceRange", v)} placeholder="¥50-100/人" />
         <FormInput label="价格数值" value={form.priceValue} onChange={(v) => updateField("priceValue", v)} placeholder="如 10（纯数字）" type="number" />
         <div className="sm:col-span-2">
-          <FormInput label="一句话推荐�? value={form.summary} onChange={(v) => updateField("summary", v)} required placeholder="简短的推荐�? />
+          <FormInput label="一句话推荐语" value={form.summary} onChange={(v) => updateField("summary", v)} required placeholder="简短的推荐语" />
         </div>
         <div className="sm:col-span-2">
           <FormInput label="地址" value={form.address} onChange={(v) => updateField("address", v)} required placeholder="详细地址" />
         </div>
         <FormInput label="营业时间" value={form.openingHours} onChange={(v) => updateField("openingHours", v)} placeholder="09:00-22:00" />
-        <FormInput label="最后核实日�? type="date" value={form.lastConfirmedDate} onChange={(v) => updateField("lastConfirmedDate", v)} required />
+        <FormInput label="最后核实日期" type="date" value={form.lastConfirmedDate} onChange={(v) => updateField("lastConfirmedDate", v)} required />
         <FormInput label="纬度 (lat)" value={form.lat} onChange={(v) => updateField("lat", v)} placeholder="18.2528" />
         <FormInput label="经度 (lon)" value={form.lon} onChange={(v) => updateField("lon", v)} placeholder="109.512" />
         <FormInput label="图片路径" value={form.imageUrl} onChange={(v) => updateField("imageUrl", v)} placeholder="/images/xxx.jpg" />
-        <FormInput label="标签（逗号分隔�? value={form.tags} onChange={(v) => updateField("tags", v)} placeholder="标签1, 标签2" />
+        <FormInput label="标签（逗号分隔）" value={form.tags} onChange={(v) => updateField("tags", v)} placeholder="标签1, 标签2" />
         <div className="sm:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">实测笔记</label>
           <textarea
@@ -204,7 +204,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
       {/* detailFields */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-bold text-gray-900">自定义字�?/h3>
+          <h3 className="text-sm font-bold text-gray-900">自定义字段</h3>
           <button type="button" onClick={addDetailField} className="text-xs text-blue-600 hover:text-blue-800">+ 添加字段</button>
         </div>
         <div className="space-y-2">
@@ -212,11 +212,11 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
             <div key={i} className="flex items-center gap-2">
               <input
                 type="text" value={f.key} onChange={(e) => updateDetailField(i, "key", e.target.value)}
-                placeholder="字段�? className="flex-1 px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                placeholder="字段名" className="flex-1 px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-sm"
               />
               <input
                 type="text" value={f.value} onChange={(e) => updateDetailField(i, "value", e.target.value)}
-                placeholder="字段�? className="flex-[2] px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                placeholder="字段值" className="flex-[2] px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-sm"
               />
               <button type="button" onClick={() => removeDetailField(i)} disabled={form.detailFields.length <= 1}
                 className="px-2 py-1 text-xs text-red-500 hover:text-red-700 border border-red-200 rounded hover:bg-red-50 disabled:opacity-30 transition-colors"
@@ -230,7 +230,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
         <button type="submit" disabled={loading}
           className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors disabled:opacity-50 text-sm"
         >
-          {loading ? "保存�?.." : isEditing ? "更新实体" : "创建实体"}
+          {loading ? "保存中..." : isEditing ? "更新实体" : "创建实体"}
         </button>
         <button type="button" onClick={() => router.back()} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">取消</button>
       </div>
