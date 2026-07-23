@@ -6,12 +6,28 @@ export default function DashboardPage() {
   const recentEntities = [...entities]
     .sort((a, b) => new Date(b.lastConfirmedDate).getTime() - new Date(a.lastConfirmedDate).getTime())
     .slice(0, 5);
+  const gitHubConfigured = !!(process.env.GITHUB_TOKEN && process.env.GITHUB_OWNER && process.env.GITHUB_REPO);
+  const gitHubMode = process.env.NODE_ENV !== "development" && gitHubConfigured;
 
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">📊 仪表盘</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {!gitHubConfigured && (
+          <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800">
+            ⚠️ GitHub 未配置。后台编辑将保存到本地文件（仅开发模式生效，Vercel 上数据会丢失）。
+          </div>
+        )}
+        {gitHubMode && (
+          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-sm text-green-800">
+            ✅ GitHub 已连接。后台编辑将自动提交并触发 Vercel 重新部署。
+          </div>
+        )}
+        {!gitHubMode && gitHubConfigured && (
+          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+            💻 开发模式。编辑将保存到本地文件。
+          </div>
+        )}      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard label="实体总数" value={entities.length.toString()} />
         <StatCard label="分类数" value={siteConfig.categories.length.toString()} />
         <StatCard label="城市" value={siteConfig.city} />
