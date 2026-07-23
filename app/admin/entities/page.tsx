@@ -19,7 +19,7 @@ export default function EntitiesListPage() {
   const [deleting, setDeleting] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    fetch("/admin/api/entities", { headers: { Authorization: "Bearer " + localStorage.getItem("admin-token") } })
+    fetch("/admin/api/entities", { headers: { Authorization: `Bearer ${localStorage.getItem("admin-token")}` } })
       .then((r) => r.json())
       .then((data) => setEntities(Array.isArray(data) ? data : []))
       .catch(() => {})

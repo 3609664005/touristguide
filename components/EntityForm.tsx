@@ -114,7 +114,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
       const token = localStorage.getItem("admin-token");
       const res = await fetch("/admin/api/entities", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": "Bearer ${token}" },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: JSON.stringify(payload),
       });
 
