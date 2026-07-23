@@ -121,7 +121,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
       if (!res.ok) {
         setError(data.error || "保存失败");
       } else {
-        setSuccess("已提交，1-2 分钟后生�?);
+        setSuccess("已提交，1-2 分钟后生效");
         if (!isEditing) {
           setForm({
             id: "", name: "", category: siteConfig.categories[0] || "", summary: "",
