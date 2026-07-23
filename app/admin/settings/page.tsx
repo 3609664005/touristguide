@@ -18,7 +18,7 @@ export default function SettingsPage() {
   });
 
   useEffect(() => {
-    fetch("/admin/api/settings")
+    fetch("/admin/api/settings", { headers: { Authorization: "Bearer " + localStorage.getItem("admin-token") } })
       .then((r) => r.json())
       .then((data) => {
         setForm({
@@ -48,9 +48,7 @@ export default function SettingsPage() {
     setLoading(true);
     try {
       const res = await fetch("/admin/api/settings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + localStorage.getItem("admin-token") },        body: JSON.stringify(form),
       });
       const data = await res.json();
       if (!res.ok) {

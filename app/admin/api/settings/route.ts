@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/lib/session";
-import { SessionData } from "@/lib/session";
+import { verifyToken } from "@/lib/session";
+
 import { validateSiteConfig, updateGitHubFile } from "@/lib/github";
 import siteConfig from "@/site.config";
 
@@ -9,8 +9,8 @@ export async function GET() {
 }
 export async function POST(request: NextRequest) {
   try {
-    const session = await getSession();
-    if (!session.isLoggedIn) {
+    const authHeader = request.headers.get("authorization");
+    if (!await verifyToken(authHeader)) {
       return NextResponse.json({ error: "未登录" }, { status: 401 });
     }
 

@@ -1,23 +1,14 @@
-import { getIronSession, SessionOptions } from "iron-session";
-import { cookies } from "next/headers";
+import { unsealData } from "iron-session";
 
-export interface SessionData {
-  isLoggedIn: boolean;
-}
+const SESSION_PASSWORD = process.env.SESSION_SECRET || "token-secret-at-least-32-chars-long!!";
 
-export const sessionOptions: SessionOptions = {
-  password: process.env.SESSION_SECRET || "this-is-a-dev-secret-change-in-production-32+chars",
-  cookieName: "admin-session",
-  cookieOptions: {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax" as const,
-    path: "/",
-    maxAge: 60 * 60 * 8,
-  },
-};
-
-export async function getSession() {
-  const cookieStore = cookies();
-  return getIronSession<SessionData>(cookieStore, sessionOptions);
+export async function verifyToken(authHeader: string | null): Promise<boolean> {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) return false;
+  try {
+    const token = authHeader.slice(7);
+    const data = await unsealData<{ isLoggedIn: boolean }>(token, { password: SESSION_PASSWORD });
+    return data.isLoggedIn === true;
+  } catch {
+    return false;
+  }
 }

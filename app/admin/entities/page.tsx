@@ -19,7 +19,7 @@ export default function EntitiesListPage() {
   const [deleting, setDeleting] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    fetch("/admin/api/entities")
+    fetch("/admin/api/entities", { headers: { Authorization: "Bearer " + localStorage.getItem("admin-token") } })
       .then((r) => r.json())
       .then((data) => setEntities(Array.isArray(data) ? data : []))
       .catch(() => {})
@@ -30,7 +30,7 @@ export default function EntitiesListPage() {
     if (!window.confirm(`确定要删除「${entityName}」吗？此操作不可撤销。`)) return;
     setDeleting((prev) => new Set(prev).add(slug));
     try {
-      await deleteEntity(slug, entityName);
+      const tok = localStorage.getItem("admin-token") || ""; await deleteEntity(slug, entityName, tok);
       setEntities((prev) => prev.filter((e) => e.id !== slug));
     } catch (err) {
       const msg = err instanceof Error ? err.message : "删除失败，请稍后重试";

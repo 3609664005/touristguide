@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import siteConfig from "@/site.config";
@@ -111,9 +111,10 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
         faq: form.faq.filter((f) => f.question.trim() && f.answer.trim()),
       };
 
+      const token = localStorage.getItem("admin-token");
       const res = await fetch("/admin/api/entities", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer ${token}" },
         body: JSON.stringify(payload),
       });
 
