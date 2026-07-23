@@ -21,11 +21,13 @@ function LoginForm() {
         body: JSON.stringify({ password }),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
+        localStorage.setItem("admin-token", data.token);
         const redirect = searchParams.get("redirect") || "/admin/dashboard";
         router.push(redirect);
       } else {
-        const data = await res.json();
         setError(data.error || "登录失败");
       }
     } catch (err) {
@@ -44,18 +46,14 @@ function LoginForm() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">密码</label>
             <input
-              type="password"
-              value={password}
+              type="password" value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-              placeholder="请输入管理员密码"
-              required
+              placeholder="请输入管理员密码" required
             />
           </div>
           {error && <div className="text-sm text-red-600 bg-red-50 p-2 rounded">{error}</div>}
-          <button
-            type="submit"
-            disabled={loading}
+          <button type="submit" disabled={loading}
             className="w-full py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "登录中..." : "登录"}
@@ -68,11 +66,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={
-      <div className="flex items-center justify-center min-h-[80vh]">
-        <span className="text-gray-400">加载中...</span>
-      </div>
-    }>
+    <Suspense fallback={<div className="flex items-center justify-center min-h-[80vh]"><span className="text-gray-400">加载中...</span></div>}>
       <LoginForm />
     </Suspense>
   );
