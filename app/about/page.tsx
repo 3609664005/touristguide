@@ -1,9 +1,9 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 import siteConfig from "@/site.config";
 
 export const metadata: Metadata = {
-  title: "关于我们",
-  description: `${siteConfig.siteName}的信息采集与更新标准 — 所有信息均经过实地核实并带有时间戳`,
+  title: "关于 TouristGuide.cn",
+  description: `TouristGuide.cn 是独立旅游体验攻略平台，专注于真实旅行体验与小众目的地。了解我们的内容标准与品牌声明。`,
 };
 
 export default function AboutPage() {
@@ -13,7 +13,7 @@ export default function AboutPage() {
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">{siteConfig.about.title}</h1>
       <div className="space-y-8">
         {siteConfig.about.sections.map((section, idx) => (
-          <section key={idx}><h2 className="text-lg font-bold text-gray-900 mb-3">{section.heading}</h2><p className="text-gray-700 leading-relaxed">{section.body}</p></section>
+          <section key={idx}><h2 className="text-lg font-bold text-gray-900 mb-3">{section.heading}</h2><p className="text-gray-700 leading-relaxed whitespace-pre-line">{section.body}</p></section>
         ))}
       </div>
     </div>

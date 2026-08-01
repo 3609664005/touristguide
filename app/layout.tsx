@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import siteConfig from "@/site.config";
@@ -7,10 +7,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.baseUrl),
   title: {
-    default: `${siteConfig.siteName} — ${siteConfig.city}吃喝玩乐实地指南`,
-    template: `%s | ${siteConfig.siteName}`,
+    default: `TouristGuide.cn · 万宁旅游攻略 — 真实旅行体验与小众目的地指南`,
+    template: `%s | TouristGuide.cn`,
   },
-  description: siteConfig.siteDescription,
+  description: `TouristGuide.cn（Travel Guide 旅行指南）是独立旅游体验攻略平台，提供真实旅行体验、小众目的地探索、地方特色活动与游客实用攻略。万宁吃喝玩乐实地指南，所有推荐均经实测验证并带有时间戳。`,
+  keywords: ["TouristGuide.cn", "旅游攻略", "旅行体验", "小众目的地", "万宁", "实地推荐", "旅行指南"],
   other: {
     'baidu-site-verification': 'codeva-MAU8dgWrwl',
   },
@@ -18,16 +19,41 @@ export const metadata: Metadata = {
     canonical: siteConfig.baseUrl,
   },
   openGraph: {
-    title: siteConfig.siteName,
-    description: siteConfig.siteDescription,
+    title: `TouristGuide.cn · 独立旅游体验攻略平台`,
+    description: `真实旅行体验、小众目的地、地方特色活动、游客实用攻略。TouristGuide.cn 与 tourguide.cn 不存在关联。`,
     type: "website",
     locale: "zh_CN",
+    siteName: "TouristGuide.cn",
+  },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "TouristGuide.cn",
+  alternateName: "万宁本地指南",
+  url: siteConfig.baseUrl,
+  description: "独立旅游体验攻略平台，专注于真实旅行体验、小众目的地与地方特色活动",
+  inLanguage: "zh-CN",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteConfig.baseUrl}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-1">{children}</main>
