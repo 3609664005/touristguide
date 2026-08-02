@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   keywords: ["TouristGuide.cn", "旅游攻略", "旅行体验", "小众目的地", "万宁", "实地推荐", "旅行指南"],
   other: {
     'baidu-site-verification': 'codeva-MAU8dgWrwl',
+    'sogou_site_verification': '7Bc5Up3T6s',
   },
   alternates: {
     canonical: siteConfig.baseUrl,
