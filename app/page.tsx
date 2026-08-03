@@ -1,10 +1,13 @@
 ﻿import siteConfig from "@/site.config";
+import Link from "next/link";
 import { getAllEntities, getEntitiesByCategory } from "@/lib/entities";
+import { getLatestGuides } from "@/lib/guides";
 import CategoryCard from "@/components/CategoryCard";
 import RandomEntity from "@/components/RandomEntity";
 
 export default function HomePage() {
   const allEntities = getAllEntities();
+  const latestGuides = getLatestGuides(3);
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <section className="mb-12 text-center sm:text-left">
@@ -31,6 +34,30 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {latestGuides.length > 0 && (
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-xl font-bold text-gray-900">旅游攻略</h2>
+            <Link href="/guide" className="text-sm text-blue-600 hover:text-blue-700 transition-colors">查看全部 →</Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {latestGuides.map((guide) => (
+              <Link
+                key={guide.slug}
+                href={`/guide/${guide.slug}`}
+                className="group block rounded-lg border border-gray-200 bg-white p-5 hover:shadow-md hover:border-blue-300 transition-all duration-200"
+              >
+                <span className="text-xs px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100">{guide.category}</span>
+                <h3 className="mt-2 text-base font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">{guide.title}</h3>
+                <p className="mt-1 text-sm text-gray-600 line-clamp-2">{guide.description}</p>
+                <p className="mt-3 text-xs text-gray-400">{guide.updatedAt}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="mb-12"><RandomEntity entities={allEntities} /></section>
     </div>
   );
