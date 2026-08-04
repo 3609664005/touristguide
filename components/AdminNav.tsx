@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export default function AdminNav() {
   return (
@@ -8,10 +8,11 @@ export default function AdminNav() {
           <div className="flex items-center gap-1">
             <Link href="/admin/dashboard" className="px-3 py-2 text-sm rounded hover:bg-gray-700 transition-colors">📊 仪表盘</Link>
             <Link href="/admin/entities" className="px-3 py-2 text-sm rounded hover:bg-gray-700 transition-colors">📋 实体管理</Link>
+            <Link href="/admin/guides" className="px-3 py-2 text-sm rounded hover:bg-gray-700 transition-colors">📝 攻略管理</Link>
             <Link href="/admin/settings" className="px-3 py-2 text-sm rounded hover:bg-gray-700 transition-colors">⚙️ 网站设置</Link>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">← 返回前台</Link>
+            <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">→ 返回前台</Link>
           </div>
         </div>
       </div>

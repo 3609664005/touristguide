@@ -1,12 +1,12 @@
 ﻿import { MetadataRoute } from "next";
 import siteConfig from "@/site.config";
 import { getAllEntities } from "@/lib/entities";
-import { getAllGuides } from "@/lib/guides";
+import { getPublishedGuides } from "@/lib/guides";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.baseUrl;
   const entities = getAllEntities();
-  const guides = getAllGuides();
+  const guides = getPublishedGuides();
   const staticUrls: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },

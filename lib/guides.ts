@@ -10,12 +10,17 @@ export interface Guide {
   updatedAt: string;
   content: string;
   relatedEntities: string[];
+  status?: "published" | "hidden";
 }
 
 const typedGuides = guides as unknown as Guide[];
 
 export function getAllGuides(): Guide[] {
   return typedGuides;
+}
+
+export function getPublishedGuides(): Guide[] {
+  return typedGuides.filter((g) => g.status !== "hidden");
 }
 
 export function getGuideBySlug(slug: string): Guide | undefined {
@@ -27,7 +32,7 @@ export function getAllGuideSlugs(): string[] {
 }
 
 export function getLatestGuides(count: number): Guide[] {
-  return [...typedGuides]
+  return getPublishedGuides()
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, count);
 }

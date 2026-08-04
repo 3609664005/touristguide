@@ -14,7 +14,7 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: GuideDetailProps): Metadata {
   const guide = getGuideBySlug(params.slug);
-  if (!guide) return { title: "未找到" };
+  if (!guide || guide.status === "hidden") return { title: "未找到" };
   return {
     title: guide.title,
     description: guide.description,
@@ -44,7 +44,7 @@ function renderMarkdown(content: string): string {
 
 export default function GuideDetailPage({ params }: GuideDetailProps) {
   const guide = getGuideBySlug(params.slug);
-  if (!guide) notFound();
+  if (!guide || guide.status === "hidden") notFound();
 
   const relatedEntities = guide.relatedEntities
     .map((slug) => getEntityBySlug(slug))

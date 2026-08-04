@@ -1,7 +1,7 @@
 ﻿import { Metadata } from "next";
 import Link from "next/link";
 import siteConfig from "@/site.config";
-import { getAllGuides } from "@/lib/guides";
+import { getPublishedGuides } from "@/lib/guides";
 
 export const metadata: Metadata = {
   title: "旅游攻略",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function GuideListPage() {
-  const guides = getAllGuides();
+  const guides = getPublishedGuides();
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <nav className="text-sm text-gray-500 mb-6">
