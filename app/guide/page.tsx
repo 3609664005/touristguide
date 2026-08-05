@@ -6,6 +6,9 @@ import { getPublishedGuides } from "@/lib/guides";
 export const metadata: Metadata = {
   title: "旅游攻略",
   description: `${siteConfig.city}旅游攻略与路线推荐 — 真实体验、小众路线、在地玩法，由 TouristGuide.cn 整理。`,
+  alternates: {
+    canonical: `${siteConfig.baseUrl}/guide`,
+  },
 };
 
 export default function GuideListPage() {

@@ -4,6 +4,9 @@ import siteConfig from "@/site.config";
 export const metadata: Metadata = {
   title: "关于 TouristGuide.cn",
   description: `TouristGuide.cn 是独立旅游体验攻略平台，专注于真实旅行体验与小众目的地。了解我们的内容标准与品牌声明。`,
+  alternates: {
+    canonical: `${siteConfig.baseUrl}/about`,
+  },
 };
 
 export default function AboutPage() {

@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import siteConfig from "@/site.config";
@@ -17,6 +17,9 @@ export function generateMetadata({ params }: DetailPageProps): Metadata {
   return {
     title: entity.name,
     description: entity.summary,
+    alternates: {
+      canonical: `${siteConfig.baseUrl}/entity/${entity.id}`,
+    },
     openGraph: { title: entity.name, description: entity.summary, images: [entity.imageUrl], type: "website" },
   };
 }

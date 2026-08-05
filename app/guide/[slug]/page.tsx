@@ -18,6 +18,9 @@ export function generateMetadata({ params }: GuideDetailProps): Metadata {
   return {
     title: guide.title,
     description: guide.description,
+    alternates: {
+      canonical: `${siteConfig.baseUrl}/guide/${guide.slug}`,
+    },
     openGraph: {
       title: guide.title,
       description: guide.description,
