@@ -423,5 +423,59 @@
         "description": ""
       }
     ]
+  },
+  {
+    "id": "jinake-coffee",
+    "name": "吉纳客咖啡（JINAK Coffee）",
+    "category": "体验",
+    "summary": "吉纳客咖啡位于万宁兴隆华侨农场，是集咖啡种植、加工生产、线下门店、电商销售与咖啡研学文旅为一体的本土咖啡品牌。传承兴隆华侨传统焙炒咖啡工艺，主打海南兴隆罗布斯塔咖啡，设有咖啡博物馆与工厂研学基地，游客可参观生产线、体验烘焙手冲，了解兴隆咖啡文化。",
+    "address": "万宁市兴隆华侨农场兴隆大道380号",
+    "tags": [
+      "兴隆咖啡",
+      "咖啡体验",
+      "万宁旅游"
+    ],
+    "openingHours": "待确认",
+    "lastConfirmedDate": "2026-08-06",
+    "personalNote": "基础信息整理，未进行实地体验。",
+    "imageUrl": "/images/placeholder.svg",
+    "detailFields": {},
+    "faq": []
+  },
+  {
+    "id": "xinglong-nanyang-flavor",
+    "name": "兴隆南洋风味",
+    "category": "餐厅",
+    "summary": "兴隆南洋风味是万宁兴隆华侨农场的侨乡南洋菜餐馆，由印尼、马来归国华侨将东南亚饮食结合海南本地食材演化而成。以椰浆、斑斓、香茅、南姜为核心香料，提供咖喱、沙爹、娘惹糕点、叻沙等南洋特色菜品，口味柔和，糕点品类丰富，是体验兴隆侨乡饮食文化的代表性餐馆。",
+    "address": "海南省万宁市兴隆华侨农场兴生路家和园A11栋102-1",
+    "tags": [
+      "兴隆美食",
+      "南洋菜",
+      "侨乡风味"
+    ],
+    "openingHours": "08:00-24:00",
+    "lastConfirmedDate": "2026-08-06",
+    "personalNote": "基础信息整理，未进行实地体验。",
+    "imageUrl": "/images/placeholder.svg",
+    "detailFields": {},
+    "faq": []
+  },
+  {
+    "id": "xinglong-redai-zhiwuyuan",
+    "name": "兴隆热带植物园",
+    "category": "景点",
+    "summary": "兴隆热带植物园位于万宁兴隆镇223国道，隶属于中国热带农业科学院香料饮料研究所，1957年建园，是国家4A级景区。园区占地约740亩，收集保存热带、亚热带植物3200余种，设有植物观赏区、试验示范区、科技研发区等功能区。游客可近距离观察咖啡、可可、香草兰、胡椒等经济作物原生植株，园内提供免费咖啡与茶饮品鉴。",
+    "address": "海南省万宁市兴隆镇223国道（兴隆华侨农场南部）",
+    "tags": [
+      "兴隆旅游",
+      "热带植物",
+      "科普教育"
+    ],
+    "openingHours": "08:30-17:00",
+    "lastConfirmedDate": "2026-08-06",
+    "personalNote": "基础信息整理，未进行实地体验。",
+    "imageUrl": "/images/placeholder.svg",
+    "detailFields": {},
+    "faq": []
   }
 ]
