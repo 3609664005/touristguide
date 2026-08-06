@@ -5,6 +5,7 @@ import siteConfig from "@/site.config";
 
 interface DetailField { key: string; value: string }
 interface FaqItem { question: string; answer: string }
+interface EntityImageItem { url: string; title: string; description: string }
 
 interface EntityFormData {
   id: string; name: string; category: string; summary: string; address: string;
@@ -12,6 +13,7 @@ interface EntityFormData {
   personalNote: string; imageUrl: string; lat: string; lon: string;
   detailFields: DetailField[];
   faq: FaqItem[];
+  images?: EntityImageItem[];
 }
 
 interface EntityFormProps {
@@ -33,6 +35,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
       imageUrl: "/images/placeholder.svg", lat: "", lon: "",
       detailFields: [{ key: "", value: "" }, { key: "", value: "" }],
       faq: [{ question: "", answer: "" }],
+      images: [],
     }
   );
 
@@ -80,6 +83,25 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
     }));
   };
 
+
+  const updateImage = (index: number, key: keyof EntityImageItem, value: string) => {
+    setForm((prev) => {
+      const items = [...(prev.images || [])];
+      items[index] = { ...items[index], [key]: value };
+      return { ...prev, images: items };
+    });
+  };
+
+  const addImage = () => {
+    setForm((prev) => ({ ...prev, images: [...(prev.images || []), { url: "", title: "", description: "" }] }));
+  };
+
+  const removeImage = (index: number) => {
+    setForm((prev) => ({
+      ...prev,
+      images: (prev.images || []).filter((_, i) => i !== index),
+    }));
+  };
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
@@ -108,6 +130,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
         lat: form.lat ? parseFloat(form.lat) : undefined,
         lon: form.lon ? parseFloat(form.lon) : undefined,
         detailFields: detailFieldsObj,
+        images: (form.images || []).filter((img) => img.url.trim()),
         faq: form.faq.filter((f) => f.question.trim() && f.answer.trim()),
       };
 
@@ -131,6 +154,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
             imageUrl: "/images/placeholder.svg", lat: "", lon: "",
             detailFields: [{ key: "", value: "" }, { key: "", value: "" }],
       faq: [{ question: "", answer: "" }],
+      images: [],
           });
         }
       }
@@ -226,6 +250,38 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
           ))}
         </div>
       </div>
+      {/* 实拍图片 */}
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-bold text-gray-900">🖼️ 实拍图片</h3>
+          <button type="button" onClick={addImage} className="text-xs text-blue-600 hover:text-blue-800">+ 添加图片</button>
+        </div>
+        <div className="space-y-3">
+          {(form.images || []).map((img, i) => (
+            <div key={i} className="border border-gray-200 rounded-lg p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-gray-400">图片 #{i + 1}</span>
+                <button type="button" onClick={() => removeImage(i)}
+                  className="px-2 py-0.5 text-xs text-red-500 hover:text-red-700 border border-red-200 rounded hover:bg-red-50 transition-colors"
+                >删除</button>
+              </div>
+              <input
+                type="text" value={img.url} onChange={(e) => updateImage(i, "url", e.target.value)}
+                placeholder="图片URL（必填）" className="w-full px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-sm mb-2"
+              />
+              <input
+                type="text" value={img.title} onChange={(e) => updateImage(i, "title", e.target.value)}
+                placeholder="标题（选填）" className="w-full px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-sm mb-2"
+              />
+              <input
+                type="text" value={img.description} onChange={(e) => updateImage(i, "description", e.target.value)}
+                placeholder="描述（选填）" className="w-full px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
 
       <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
         <button type="submit" disabled={loading}

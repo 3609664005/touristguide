@@ -1,4 +1,4 @@
-﻿import siteConfig from "@/site.config";
+import siteConfig from "@/site.config";
 import EntityForm from "@/components/EntityForm";
 
 export const metadata = { title: "新增实体 | 管理后台" };
@@ -11,6 +11,7 @@ export default function NewEntityPage() {
     imageUrl: "/images/placeholder.svg", lat: "", lon: "",
     detailFields: [{ key: "", value: "" }, { key: "", value: "" }],
     faq: [{ question: "", answer: "" }],
+   images: [],
   };
   return (
     <div>

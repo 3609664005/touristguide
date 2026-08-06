@@ -1,4 +1,4 @@
-﻿import { notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getEntityBySlug } from "@/lib/entities";
 import EntityForm from "@/components/EntityForm";
 
@@ -25,6 +25,7 @@ export default function EditEntityPage({ params }: EditPageProps) {
     lon: entity.lon?.toString() || "",
     detailFields: Object.entries(entity.detailFields).map(([key, value]) => ({ key, value })),
     faq: entity.faq?.length ? entity.faq : [{ question: "", answer: "" }],
+   images: entity.images || [],
   };
   if (initialData.detailFields.length === 0) {
     initialData.detailFields = [{ key: "", value: "" }, { key: "", value: "" }];

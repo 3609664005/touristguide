@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "@/lib/session";
 import { validateEntity, updateGitHubFile } from "@/lib/github";
 import { getAllEntities } from "@/lib/entities";
@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
       imageUrl: body.imageUrl || "/images/placeholder.svg",
       detailFields: body.detailFields || {},
       faq: Array.isArray(body.faq) ? body.faq : [],
+     images: Array.isArray(body.images) ? body.images : [],
     };
 
     const allEntities = getAllEntities();
