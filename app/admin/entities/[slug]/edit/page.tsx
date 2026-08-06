@@ -20,6 +20,7 @@ export default function EditEntityPage({ params }: EditPageProps) {
     openingHours: entity.openingHours || "",
     lastConfirmedDate: entity.lastConfirmedDate,
     personalNote: entity.personalNote,
+    noteLabel: entity.noteLabel || "实测笔记",
     imageUrl: entity.imageUrl,
     lat: entity.lat?.toString() || "",
     lon: entity.lon?.toString() || "",

@@ -8,6 +8,7 @@ export default function NewEntityPage() {
     id: "", name: "", category: siteConfig.categories[0] || "", summary: "",
     address: "", priceRange: "", priceValue: "", tags: "", openingHours: "",
     lastConfirmedDate: new Date().toISOString().slice(0, 10), personalNote: "",
+    noteLabel: "实测笔记",
     imageUrl: "/images/placeholder.svg", lat: "", lon: "",
     detailFields: [{ key: "", value: "" }, { key: "", value: "" }],
     faq: [{ question: "", answer: "" }],

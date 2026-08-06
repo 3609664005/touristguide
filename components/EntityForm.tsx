@@ -10,7 +10,7 @@ interface EntityImageItem { url: string; title: string; description: string }
 interface EntityFormData {
   id: string; name: string; category: string; summary: string; address: string;
   priceRange: string; priceValue: string; tags: string; openingHours: string; lastConfirmedDate: string;
-  personalNote: string; imageUrl: string; lat: string; lon: string;
+  personalNote: string; noteLabel: string; imageUrl: string; lat: string; lon: string;
   detailFields: DetailField[];
   faq: FaqItem[];
   images?: EntityImageItem[];
@@ -31,7 +31,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
     initialData || {
       id: "", name: "", category: siteConfig.categories[0] || "", summary: "",
       address: "", priceRange: "", priceValue: "", tags: "", openingHours: "",
-      lastConfirmedDate: new Date().toISOString().slice(0, 10), personalNote: "",
+      lastConfirmedDate: new Date().toISOString().slice(0, 10), personalNote: "", noteLabel: "实测笔记",
       imageUrl: "/images/placeholder.svg", lat: "", lon: "",
       detailFields: [{ key: "", value: "" }, { key: "", value: "" }],
       faq: [{ question: "", answer: "" }],
@@ -126,6 +126,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
         openingHours: form.openingHours || undefined,
         lastConfirmedDate: form.lastConfirmedDate,
         personalNote: form.personalNote,
+        noteLabel: form.noteLabel,
         imageUrl: form.imageUrl || "/images/placeholder.svg",
         lat: form.lat ? parseFloat(form.lat) : undefined,
         lon: form.lon ? parseFloat(form.lon) : undefined,
@@ -150,7 +151,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
           setForm({
             id: "", name: "", category: siteConfig.categories[0] || "", summary: "",
             address: "", priceRange: "", priceValue: "", tags: "", openingHours: "",
-            lastConfirmedDate: new Date().toISOString().slice(0, 10), personalNote: "",
+            lastConfirmedDate: new Date().toISOString().slice(0, 10), personalNote: "", noteLabel: "实测笔记",
             imageUrl: "/images/placeholder.svg", lat: "", lon: "",
             detailFields: [{ key: "", value: "" }, { key: "", value: "" }],
       faq: [{ question: "", answer: "" }],
@@ -189,7 +190,7 @@ export default function EntityForm({ initialData, isEditing }: EntityFormProps) 
         <FormInput label="图片路径" value={form.imageUrl} onChange={(v) => updateField("imageUrl", v)} placeholder="/images/xxx.jpg" />
         <FormInput label="标签（逗号分隔）" value={form.tags} onChange={(v) => updateField("tags", v)} placeholder="标签1, 标签2" />
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">实测笔记</label>
+          <div className="flex items-center justify-between mb-1"><label className="block text-sm font-medium text-gray-700">笔记区块标题</label><div className="flex items-center gap-3"><label className="flex items-center gap-1 text-sm text-gray-600 cursor-pointer"><input type="radio" name="noteLabel" value="实测笔记" checked={form.noteLabel === "实测笔记"} onChange={() => updateField("noteLabel", "实测笔记")} className="accent-gray-900" /><span>实测笔记</span></label><label className="flex items-center gap-1 text-sm text-gray-600 cursor-pointer"><input type="radio" name="noteLabel" value="信息备注" checked={form.noteLabel === "信息备注"} onChange={() => updateField("noteLabel", "信息备注")} className="accent-gray-900" /><span>信息备注</span></label></div></div>
           <textarea
             value={form.personalNote} onChange={(e) => updateField("personalNote", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 h-28 resize-y"

@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
       openingHours: body.openingHours,
       lastConfirmedDate: body.lastConfirmedDate || new Date().toISOString().slice(0, 10),
       personalNote: body.personalNote || "",
+      noteLabel: body.noteLabel || "实测笔记",
       imageUrl: body.imageUrl || "/images/placeholder.svg",
       detailFields: body.detailFields || {},
       faq: Array.isArray(body.faq) ? body.faq : [],

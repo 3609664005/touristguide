@@ -91,7 +91,7 @@ export default function DetailPage({ params }: DetailPageProps) {
           </section>
         )}
         <section className="mb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">📝 实测笔记</h2>
+          <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">📝 {entity.noteLabel || "实测笔记"}</h2>
           <div className="prose prose-gray max-w-none text-gray-700 leading-relaxed whitespace-pre-line">{entity.personalNote}</div>
         </section>
         {entity.faq && entity.faq.length > 0 && (

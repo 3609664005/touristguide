@@ -440,7 +440,8 @@
     "personalNote": "基础信息整理，未进行实地体验。",
     "imageUrl": "/images/placeholder.svg",
     "detailFields": {},
-    "faq": []
+    "faq": [],
+    "noteLabel": "信息备注"
   },
   {
     "id": "xinglong-nanyang-flavor",
@@ -458,7 +459,8 @@
     "personalNote": "基础信息整理，未进行实地体验。",
     "imageUrl": "/images/placeholder.svg",
     "detailFields": {},
-    "faq": []
+    "faq": [],
+    "noteLabel": "信息备注"
   },
   {
     "id": "xinglong-redai-zhiwuyuan",
@@ -474,8 +476,10 @@
     "openingHours": "08:30-17:00",
     "lastConfirmedDate": "2026-08-06",
     "personalNote": "基础信息整理，未进行实地体验。",
+    "noteLabel": "信息备注",
     "imageUrl": "/images/placeholder.svg",
     "detailFields": {},
-    "faq": []
+    "faq": [],
+    "images": []
   }
 ]

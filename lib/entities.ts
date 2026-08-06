@@ -20,6 +20,7 @@ export interface Entity {
   openingHours?: string;
   lastConfirmedDate: string;
   personalNote: string;
+  noteLabel?: string;
   imageUrl: string;
   images?: EntityImage[];
   detailFields: Record<string, string>;
