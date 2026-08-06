@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import siteConfig from "@/site.config";
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     default: `TouristGuide.cn · 万宁旅游攻略 — 真实旅行体验与小众目的地指南`,
     template: `%s | TouristGuide.cn`,
   },
-  description: `TouristGuide.cn（Travel Guide 旅行指南）是独立旅游体验攻略平台，提供真实旅行体验、小众目的地探索、地方特色活动与游客实用攻略。万宁吃喝玩乐实地指南，所有推荐均经实测验证并带有时间戳。`,
+  description: "万宁旅游攻略与实地指南，覆盖兴隆美食、本地咖啡、小众景点与特色体验。所有推荐均经实地核验，提供真实可靠的旅行信息。",
   keywords: ["TouristGuide.cn", "旅游攻略", "旅行体验", "小众目的地", "万宁", "实地推荐", "旅行指南"],
   other: {
     'baidu-site-verification': 'codeva-MAU8dgWrwl',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `TouristGuide.cn · 独立旅游体验攻略平台`,
-    description: `真实旅行体验、小众目的地、地方特色活动、游客实用攻略。TouristGuide.cn 与 tourguide.cn 不存在关联。`,
+    description: "万宁实地旅游指南 — 兴隆美食、南洋咖啡、小众景点、冲浪体验，全部经实地核验。",
     type: "website",
     locale: "zh_CN",
     siteName: "TouristGuide.cn",

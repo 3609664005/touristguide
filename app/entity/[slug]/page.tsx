@@ -11,12 +11,23 @@ export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
 }
 
+
+function getEntityDescription(entity: ReturnType<typeof getEntityBySlug>): string {
+  if (!entity) return "";
+  const summary = entity.summary || "";
+  // Take first ~110 Chinese chars, cut at last sentence boundary
+  const maxLen = 110;
+  if (summary.length <= maxLen) return summary;
+  const truncated = summary.slice(0, maxLen);
+  const lastPeriod = Math.max(truncated.lastIndexOf("。"), truncated.lastIndexOf("，"), truncated.lastIndexOf("；"));
+  return (lastPeriod > maxLen * 0.6 ? truncated.slice(0, lastPeriod + 1) : truncated) + "…";
+}
 export function generateMetadata({ params }: DetailPageProps): Metadata {
   const entity = getEntityBySlug(params.slug);
   if (!entity) return { title: "未找到" };
   return {
     title: entity.name,
-    description: entity.summary,
+    description: getEntityDescription(entity),
     alternates: {
       canonical: `${siteConfig.baseUrl}/entity/${entity.id}`,
     },
