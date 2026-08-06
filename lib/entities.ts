@@ -1,4 +1,4 @@
-import entities from "@/data/entities.json";
+﻿import entities from "@/data/entities.json";
 
 export interface EntityImage {
   url: string;
