@@ -1,4 +1,4 @@
-﻿import { Metadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import siteConfig from "@/site.config";
@@ -61,6 +61,24 @@ export default function DetailPage({ params }: DetailPageProps) {
             <InfoItem label="分类" value={entity.category} />
           </dl>
         </section>
+        {entity.images && entity.images.length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">🖼️ 实拍图片</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {entity.images.map((img, idx) => (
+                <div key={idx} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                  <div className="relative w-full aspect-[4/3] bg-gray-100">
+                    <Image src={img.url} alt={img.title || entity.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 384px" />
+                  </div>
+                  <div className="p-4">
+                    {img.title && <h3 className="text-sm font-semibold text-gray-900 mb-1">{img.title}</h3>}
+                    {img.description && <p className="text-sm text-gray-600 leading-relaxed">{img.description}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
         <section className="mb-8">
           <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">📝 实测笔记</h2>
           <div className="prose prose-gray max-w-none text-gray-700 leading-relaxed whitespace-pre-line">{entity.personalNote}</div>

@@ -1,5 +1,11 @@
 import entities from "@/data/entities.json";
 
+export interface EntityImage {
+  url: string;
+  title: string;
+  description: string;
+}
+
 export interface Entity {
   id: string;
   name: string;
@@ -15,6 +21,7 @@ export interface Entity {
   lastConfirmedDate: string;
   personalNote: string;
   imageUrl: string;
+  images?: EntityImage[];
   detailFields: Record<string, string>;
   faq?: Array<{ question: string; answer: string }>;
 }
