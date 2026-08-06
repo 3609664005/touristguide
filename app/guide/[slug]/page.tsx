@@ -1,4 +1,4 @@
-﻿import { Metadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import siteConfig from "@/site.config";
@@ -12,12 +12,21 @@ export function generateStaticParams() {
   return getAllGuideSlugs().map((slug) => ({ slug }));
 }
 
+
+function getGuideDescription(desc: string): string {
+  if (!desc) return "";
+  const maxLen = 110;
+  if (desc.length <= maxLen) return desc;
+  const truncated = desc.slice(0, maxLen);
+  const lastPeriod = Math.max(truncated.lastIndexOf("。"), truncated.lastIndexOf("，"), truncated.lastIndexOf("；"));
+  return (lastPeriod > maxLen * 0.6 ? truncated.slice(0, lastPeriod + 1) : truncated) + "…";
+}
 export function generateMetadata({ params }: GuideDetailProps): Metadata {
   const guide = getGuideBySlug(params.slug);
   if (!guide || guide.status === "hidden") return { title: "未找到" };
   return {
     title: guide.title,
-    description: guide.description,
+    description: getGuideDescription(guide.description),
     alternates: {
       canonical: `${siteConfig.baseUrl}/guide/${guide.slug}`,
     },
