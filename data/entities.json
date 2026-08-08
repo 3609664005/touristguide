@@ -498,9 +498,11 @@
       "咖啡文化",
       "年轻旅行"
     ],
+    "openingHours": "全天开放（各商户营业时间不同）",
     "lastConfirmedDate": "2026-08-08",
     "personalNote": "## 推荐玩法\n\n日月湾的核心体验围绕冲浪和海边休闲展开：\n\n- 冲浪体验：日月湾是海南最适合初学者学习冲浪的海湾之一，湾区内有多家专业冲浪俱乐部提供体验课程，也适合有经验的浪人。\n- 海边咖啡：湾区聚集了多家风格各异的海边咖啡馆，适合冲浪后休息、看海、拍照。\n- 椰林公路：日月湾沿海公路两旁椰树成排，适合自驾、骑行或散步。\n- 日落观赏：傍晚时分，日月湾的日落景色是海南东线最美的之一。\n\n## 最佳旅行时间\n\n每年10月至次年4月是日月湾的最佳旅行季节，此时海浪条件最佳，天气舒适。夏季（5-9月）炎热多雨，海浪较小，但游客较少。\n\n## 适合人群\n\n冲浪爱好者和想尝试冲浪的初学者、喜欢海边咖啡和休闲氛围的年轻旅行者、摄影爱好者。不太适合追求传统观光景点的游客。",
     "noteLabel": "信息备注",
+    "entityType": "destination",
     "imageUrl": "/images/placeholder.svg",
     "detailFields": {},
     "faq": [
@@ -529,30 +531,7 @@
         "answer": "乘坐高铁到万宁站或神州站下车，出站后打车约20-30分钟可达日月湾。从三亚凤凰机场出发约1.5小时车程。"
       }
     ],
-    "images": [
-      {
-        "url": "/images/laobasa-huwai.jpg",
-        "title": "老巴萨户外用餐环境",
-        "description": "餐厅户外区域绿植环绕，设置遮阳伞和休闲座位，天气合适时适合游客坐在室外体验南洋风情。"
-      },
-      {
-        "url": "/images/laobasa-coffee and menu.jpg",
-        "title": "老巴萨饮品菜单与兴隆咖啡",
-        "description": "店内提供兴隆特色咖啡等饮品，价格便宜，6元就可以喝到咖啡，可以作为游客体验兴隆侨乡咖啡文化的一部分。"
-      },
-      {
-        "url": "/images/laobasa-xiandanhuangnangua.jpg",
-        "title": "老巴萨特色小吃，咸蛋黄南瓜",
-        "description": "当天体验的小吃，外层酥脆，适合作为多人分享的小食。"
-      },
-      {
-        "url": "/images/laobasa-niurougaifan.jpg",
-        "title": "老巴萨牛肉盖饭",
-        "description": "特色牛肉搭配米饭，牛肉口感较软，酱汁香味明显，适合日常用餐。"
-      }
-    ],
-    "openingHours": "全天开放（各商户营业时间不同）",
-    "entityType": "destination"
+    "images": []
   },
   {
     "id": "laobasa-xinglong",
