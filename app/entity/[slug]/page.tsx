@@ -60,7 +60,7 @@ export default function DetailPage({ params }: DetailPageProps) {
         </div>
         <div className="flex items-center gap-2 mb-8 p-4 rounded-lg bg-green-50 border border-green-200">
           <span className="text-green-700 font-semibold text-sm">✅ 最后核实日期：{entity.lastConfirmedDate}</span>
-          <span className="text-green-600 text-xs">（{siteConfig.siteName}承诺：所有信息均经实地核实并带有时间戳）</span>
+          <span className="text-green-600 text-xs">（{siteConfig.siteName}：内容会标注核实时间，供游客参考）</span>
         </div>
         {entity.entityType !== "destination" && (
           <section className="mb-8">

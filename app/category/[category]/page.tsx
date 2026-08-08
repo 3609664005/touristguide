@@ -15,7 +15,7 @@ export function generateMetadata({ params }: CategoryPageProps): Metadata {
   if (!siteConfig.categories.includes(category)) return { title: "分类不存在" };
   return {
     title: `${category}`,
-    description: `${siteConfig.city}最值得推荐的${category}，全部经过实地核实 — ${siteConfig.siteName}`,
+    description: `${siteConfig.city}值得推荐的${category}，信息经整理与核验 — ${siteConfig.siteName}`,
     alternates: {
       canonical: `${siteConfig.baseUrl}/category/${encodeURIComponent(category)}`,
     },

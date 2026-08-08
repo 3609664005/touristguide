@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} {siteConfig.siteName} · 所有推荐均经实地核验
+            &copy; {new Date().getFullYear()} {siteConfig.siteName} · 推荐内容结合实地体验与公开资料整理
           </div>
         </div>
         <div className="mt-4 pt-4 border-t border-gray-200 text-center">
