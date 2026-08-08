@@ -41,6 +41,7 @@ export async function POST(request: NextRequest) {
       lastConfirmedDate: body.lastConfirmedDate || new Date().toISOString().slice(0, 10),
       personalNote: body.personalNote || "",
       noteLabel: body.noteLabel || "实测笔记",
+      entityType: body.entityType || undefined,
       imageUrl: body.imageUrl || "/images/placeholder.svg",
       detailFields: body.detailFields || {},
       faq: Array.isArray(body.faq) ? body.faq : [],

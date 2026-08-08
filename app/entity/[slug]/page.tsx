@@ -62,16 +62,18 @@ export default function DetailPage({ params }: DetailPageProps) {
           <span className="text-green-700 font-semibold text-sm">✅ 最后核实日期：{entity.lastConfirmedDate}</span>
           <span className="text-green-600 text-xs">（{siteConfig.siteName}承诺：所有信息均经实地核实并带有时间戳）</span>
         </div>
-        <section className="mb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">📋 基本信息</h2>
-          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-            <InfoItem label="地址" value={entity.address} />
-            {entity.openingHours && <InfoItem label="营业时间" value={entity.openingHours} />}
-            {entity.priceRange && <InfoItem label="价格区间" value={entity.priceRange} />}
-            {entity.lat !== undefined && entity.lon !== undefined && <InfoItem label="坐标" value={`${entity.lat}, ${entity.lon}`} />}
-            <InfoItem label="分类" value={entity.category} />
-          </dl>
-        </section>
+        {entity.entityType !== "destination" && (
+          <section className="mb-8">
+                    <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">📋 基本信息</h2>
+                    <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                      <InfoItem label="地址" value={entity.address} />
+                      {entity.openingHours && <InfoItem label="营业时间" value={entity.openingHours} />}
+                      {entity.priceRange && <InfoItem label="价格区间" value={entity.priceRange} />}
+                      {entity.lat !== undefined && entity.lon !== undefined && <InfoItem label="坐标" value={`${entity.lat}, ${entity.lon}`} />}
+                      <InfoItem label="分类" value={entity.category} />
+                    </dl>
+                  </section>
+        )}
         {entity.images && entity.images.length > 0 && (
           <section className="mb-8">
             <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">🖼️ 实拍图片</h2>
@@ -91,7 +93,7 @@ export default function DetailPage({ params }: DetailPageProps) {
           </section>
         )}
         <section className="mb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">📝 {entity.noteLabel || "实测笔记"}</h2>
+          <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">📝 {entity.entityType === "destination" ? "游玩建议" : entity.noteLabel || "实测笔记"}</h2>
           <div className="prose prose-gray max-w-none text-gray-700 leading-relaxed whitespace-pre-line">{entity.personalNote}</div>
         </section>
         {entity.faq && entity.faq.length > 0 && (
@@ -108,7 +110,7 @@ export default function DetailPage({ params }: DetailPageProps) {
           </section>
         )}
 
-        {Object.keys(entity.detailFields).length > 0 && (
+        {entity.entityType !== "destination" && Object.keys(entity.detailFields).length > 0 && (
           <section className="mb-8">
             <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">📊 详细信息</h2>
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">

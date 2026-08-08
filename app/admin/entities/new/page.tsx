@@ -9,6 +9,7 @@ export default function NewEntityPage() {
     address: "", priceRange: "", priceValue: "", tags: "", openingHours: "",
     lastConfirmedDate: new Date().toISOString().slice(0, 10), personalNote: "",
     noteLabel: "实测笔记",
+    entityType: "",
     imageUrl: "/images/placeholder.svg", lat: "", lon: "",
     detailFields: [{ key: "", value: "" }, { key: "", value: "" }],
     faq: [{ question: "", answer: "" }],

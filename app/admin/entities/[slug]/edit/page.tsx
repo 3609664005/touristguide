@@ -21,6 +21,7 @@ export default function EditEntityPage({ params }: EditPageProps) {
     lastConfirmedDate: entity.lastConfirmedDate,
     personalNote: entity.personalNote,
     noteLabel: entity.noteLabel || "实测笔记",
+    entityType: entity.entityType || "",
     imageUrl: entity.imageUrl,
     lat: entity.lat?.toString() || "",
     lon: entity.lon?.toString() || "",

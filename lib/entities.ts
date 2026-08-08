@@ -21,6 +21,7 @@ export interface Entity {
   lastConfirmedDate: string;
   personalNote: string;
   noteLabel?: string;
+  entityType?: "featured" | "normal" | "destination";
   imageUrl: string;
   images?: EntityImage[];
   detailFields: Record<string, string>;
